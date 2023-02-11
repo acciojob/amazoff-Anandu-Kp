@@ -25,8 +25,8 @@ public class OrderRepository {
     }
 
     public void addOrder(Order order) {
-        String id=order.getId();
-        orders.put(id,order);
+
+        orders.put(order.getId(),order);
     }
 
     public void addPartner(String partnerId) {
@@ -91,16 +91,20 @@ public class OrderRepository {
     }
 
     public void deletePartnerById(String partnerId) {
-        ArrayList<Order> ordersOfThePartner=orderPartnerPair.get(partnerId);
-        partner.remove(partnerId);
-        for(Order order:ordersOfThePartner)
-        {
-            if(assignedorders.containsKey(order.getId()))
-            {
-              assignedorders.remove(order.getId());
-            }
-        }
-        orderPartnerPair.remove(partnerId);
+       if(orderPartnerPair.containsKey(partnerId))
+       {
+           ArrayList<Order> ordersOfThePartner=orderPartnerPair.get(partnerId);
+
+           for(Order order:ordersOfThePartner)
+           {
+               if(assignedorders.containsKey(order.getId()))
+               {
+                   assignedorders.remove(order.getId());
+               }
+           }
+           orderPartnerPair.remove(partnerId);
+       }
+       partner.remove(partnerId);
     }
 
     public void deleteOrderById(String orderId) {
