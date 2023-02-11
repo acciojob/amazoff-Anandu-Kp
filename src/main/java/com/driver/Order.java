@@ -5,7 +5,7 @@ public class Order {
     private String id;
     private int deliveryTime;
 
-    String time[];
+
 
     public Order(String id, String deliveryTime) {
 
